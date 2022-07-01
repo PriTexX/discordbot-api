@@ -1,4 +1,5 @@
 ﻿using DiscordBotAPI.Models;
+using DiscordBotAPI.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiscordBotAPI.Controllers;
@@ -8,21 +9,30 @@ namespace DiscordBotAPI.Controllers;
 public class LoginController : ControllerBase
 {
     private readonly DiscordBotApiContext _database;
+    private readonly IActiveDirectoryService _activeDirectory;
 
-    public LoginController(DiscordBotApiContext context)
+    public LoginController(DiscordBotApiContext context, IActiveDirectoryService adService)
     {
         _database = context;
+        _activeDirectory = adService;
     }
 
-    [HttpGet]
-    public string Get()
-    {
-        return "get request";
-    }
-    
     [HttpPost]
-    public UserCredentials Post(UserCredentials credentials)
+    public IActionResult Post(UserCredentials credentials)
     {
-        return credentials;
+        if (credentials.Login == "v.a.bulavin" && credentials.Password == "Stud336266!")
+        {
+            var stInfo = new StudentInfo{
+                Name = "Владислав",
+                Surname = "Булавин",
+                Department = "Информационные системы и технологии", 
+                Group = "211-721",
+                ActiveDirectoryGuid = "123456789",
+                OneCGuid = "987654321"
+            };
+            return new ObjectResult(stInfo);
+        }
+
+        return BadRequest(credentials);
     }
 }

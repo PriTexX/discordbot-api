@@ -10,10 +10,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-preview.5.22302.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.0-preview.5.22302.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="services" />
+        <PackageReference Include="System.DirectoryServices" Version="7.0.0-preview.5.22301.12" />
+        <PackageReference Include="System.DirectoryServices.AccountManagement" Version="7.0.0-preview.5.22301.12" />
     </ItemGroup>
 
 </Project>
