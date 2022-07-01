@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using DiscordBotAPI.Models;
+using DiscordBotAPI.services;
 
 namespace DiscordBotAPI;
 
@@ -17,7 +18,15 @@ public class Startup
     {
         services.AddDbContext<DiscordBotApiContext>(options => 
             options.UseInMemoryDatabase("TestDatabase"));
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
+
+        services.AddSingleton<IActiveDirectoryService, ActiveDirectoryService>(
+            x => new ActiveDirectoryService("mytestdomen.ru")
+            );
     }
  
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
