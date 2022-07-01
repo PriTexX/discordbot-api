@@ -7,12 +7,11 @@ namespace DiscordBotAPI.Models;
 public class DiscordUser
 {
     [Required]
-    [Key]
-    public int UserId { get; set; }
+    public string DiscordUserId { get; set; }
     
     [Required]
-    public Guid OneCId { get; set; }
+    public string OneCGuid { get; set; }
     
     [Required]
-    public Guid ActiveDirectoryId { get; set; }
+    public string ActiveDirectoryGuid { get; set; }
 }
